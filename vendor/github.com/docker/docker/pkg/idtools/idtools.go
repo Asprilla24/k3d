@@ -236,6 +236,10 @@ func parseSubidFile(path, username string) (ranges, error) {
 
 	s := bufio.NewScanner(subidFile)
 	for s.Scan() {
+		if err := s.Err(); err != nil {
+			return rangeList, err
+		}
+
 		text := strings.TrimSpace(s.Text())
 		if text == "" || strings.HasPrefix(text, "#") {
 			continue
@@ -256,6 +260,5 @@ func parseSubidFile(path, username string) (ranges, error) {
 			rangeList = append(rangeList, subIDRange{startid, length})
 		}
 	}
-
-	return rangeList, s.Err()
+	return rangeList, nil
 }

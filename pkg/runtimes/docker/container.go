@@ -53,7 +53,7 @@ func createContainer(ctx context.Context, dockerNode *NodeInDocker, name string)
 	// create container
 	var resp container.ContainerCreateCreatedBody
 	for {
-		resp, err = docker.ContainerCreate(ctx, &dockerNode.ContainerConfig, &dockerNode.HostConfig, &dockerNode.NetworkingConfig, nil, name)
+		resp, err = docker.ContainerCreate(ctx, &dockerNode.ContainerConfig, &dockerNode.HostConfig, &dockerNode.NetworkingConfig, name)
 		if err != nil {
 			if client.IsErrNotFound(err) {
 				if err := pullImage(ctx, docker, dockerNode.ContainerConfig.Image); err != nil {
@@ -147,7 +147,7 @@ func getNodeContainer(ctx context.Context, node *k3d.Node) (*types.Container, er
 	for k, v := range node.Labels {
 		filters.Add("label", fmt.Sprintf("%s=%s", k, v))
 	}
-        // See https://github.com/moby/moby/issues/29997 for explanation around initial /
+	// See https://github.com/moby/moby/issues/29997 for explanation around initial /
 	filters.Add("name", fmt.Sprintf("^/?%s$", node.Name)) // regex filtering for exact name match
 
 	containers, err := docker.ContainerList(ctx, types.ContainerListOptions{

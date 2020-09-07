@@ -11,7 +11,7 @@ require (
 	github.com/containerd/ttrpc v0.0.0-20190828172938-92c8520ef9f8 // indirect
 	github.com/containerd/typeurl v0.0.0-20190911142611-5eb25027c9fd // indirect
 	github.com/docker/distribution v0.0.0-20200319173657-742aab907b54 // indirect
-	github.com/docker/docker v17.12.0-ce-rc1.0.20200528204242-89382f2f2074+incompatible
+	github.com/docker/docker v0.7.3-0.20190808172531-150530564a14
 	github.com/docker/go-connections v0.4.0
 	github.com/go-test/deep v1.0.4
 	github.com/gogo/googleapis v1.3.0 // indirect
